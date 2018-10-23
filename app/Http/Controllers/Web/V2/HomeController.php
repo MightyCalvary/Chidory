@@ -5,41 +5,35 @@ namespace App\Http\Controllers\Web\V2;
 use Carbon\Carbon;
 
 use App\Subscribe;
+use App\WebConfig;
+use App\WebContent;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
 	public function home() {
-		$slider 	= [
-			['large' => '/auro/images/slider/slid1.jpg', 'small' => '/auro/images/slider/slid1-sm.jpg'],
-			['large' => '/auro/images/slider/slid2.jpg', 'small' => '/auro/images/slider/slid2-sm.jpg'],
-		];
-
-		$category 	= $this->getCategory();
+		$now 		= Carbon::now();
+		$slider 	= WebConfig::where('type', 'slider')->active($now)->get();
+		$category 	= WebConfig::where('type', 'category')->active($now)->get();
 
 		return view('web.v2.pages.home', compact('slider', 'category'));
 	}
 
 	public function portfolio($active = 'All') {
-		$category 	= $this->getCategory();
-		$category[]	= ['title' => null, 'category' => 'All', 'thumbnail' => null, 'link' => route('showcase.portfolio')];
+		$now 		= Carbon::now();
+		$category 	= WebConfig::where('type', 'category')->active($now)->get()->toarray();
+		$category[]	= ['content' => ['caption' => null, 'category' => 'All', 'thumbnail' => null, 'link' => route('showcase.portfolio')]];
 		array_multisort($category);
 
-		$content 	= collect($this->getContent());
-		$total 		= ceil(count($content) / 12);
+		$content 	= WebContent::active($now);
+
 		if(!str_is($active, 'All')){
 			$content= $content->where('category', $active);
 		}
 
-		$page 		= 1;
+		$content 	= $content->paginate(12);
 
-		if(request()->has('page')){
-			$page  	= request()->get('page') * 1;
-		}
-
-		$content 	= $content->forPage($page, 12)->all();
-
-		return view('web.v2.pages.portfolio', compact('category', 'active', 'content', 'total', 'page'));
+		return view('web.v2.pages.portfolio', compact('category', 'active', 'content'));
 	}
 
 	public function about() {
@@ -48,8 +42,10 @@ class HomeController extends Controller
 	}
 
 	public function contact() {
-		$content 	= $this->getCategory();
-		return view('web.v2.pages.contact', compact('content'));
+		$now 		= Carbon::now();
+		$category 	= WebConfig::where('type', 'category')->active($now)->get();
+
+		return view('web.v2.pages.contact', compact('category'));
 	}
 
 	public function post() {
@@ -57,21 +53,10 @@ class HomeController extends Controller
 	}
 
 	public function story($id = null) {
-		$category 	= $this->getCategory();
-		$category[]	= ['title' => null, 'category' => 'All', 'thumbnail' => null, 'link' => route('showcase.portfolio')];
-		array_multisort($category);
+		$now 		= Carbon::now();
+		$content 	= WebContent::active($now)->where('id', $id)->first();
 
-		$content 	= collect($this->getContent());
-		$total 		= ceil(count($content) / 12);
-		$page 		= 1;
-
-		if(request()->has('page')){
-			$page  	= request()->get('page') * 1;
-		}
-
-		$content 	= $content->forPage($page, 12)->all();
-
-		return view('web.v2.pages.story', compact('category', 'active', 'content', 'total', 'page'));
+		return view('web.v2.pages.story', compact('content'));
 	}
 
 	private function getCategory(){

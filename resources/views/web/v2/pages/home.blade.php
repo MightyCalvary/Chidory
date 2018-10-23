@@ -4,23 +4,26 @@
 	active
 @endsection
 @section('hero')
-	<div style="position: fixed; left: 20px; bottom: 20px; z-index: 9999999;"> 
+	<div style="position: fixed; right: 20px; bottom: 20px; z-index: 9999999;"> 
 		<audio  controls autoplay src="http://chidory.co/song/yiruma/river-flows-in-you.mp3" controlsList="nodownload"></audio>
 	</div>
-	
+
 	<!-- Slider Section --> 
 	<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
+			@foreach($slider as $k => $v)
+			<li data-target="#myCarousel" data-slide-to="{{$k}}" class="@if($loop->first) active @endif"></li>
+			@endforeach
 		</ol>
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			@foreach($slider as $k => $v)
 			<div class="item @if($loop->first) active @endif"> 
-				<img src="{{$v['large']}}" alt="Wedding" class="hidden-xs">
-				<img src="{{$v['small']}}" alt="Wedding" class="hidden-sm  hidden-md  hidden-lg">
+				<a href="{{$v['content']['link']}}">
+					<img src="{{$v['content']['web']}}" class="hidden-xs">
+					<img src="{{$v['content']['mobile']}}" class="hidden-sm  hidden-md  hidden-lg">
+				</a>
 			</div>
 			@endforeach
 		</div>
@@ -33,15 +36,15 @@
 	<!-- Service Section -->
 	<section id="services" class="section services">
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row bg-cream">
 				<div class="col-md-4">
 					<div class="services-content">
 						<h1 style="font-family: 'Sacramento', cursive;font-size:7rem" class="text-red">Love</h1>
-						<h4 style="font-family: 'Sacramento', cursive;font-size:4rem">will find it's way.</h4>
+						<h4 style="font-family: 'Sacramento', cursive;font-size:3.5rem">will find it's way.</h4>
 						<p class="hidden-sm hidden-xs">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas sed diam eget risus varius blandit sit amet non magna. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
 					</div>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-8" style="margin-top:50px;">
 					<video controls src="/video/wedding.mp4"></video>
 				</div>
 			</div>
@@ -54,14 +57,14 @@
 		<div class="container-fluid">
 			<div class="row">
 				@foreach($category as $k => $v)
-				<div class="col-sm-6 portfolio-item"> <a href="{{$v['link']}}" class="portfolio-link">
+				<div class="col-sm-6 portfolio-item"> <a href="{{$v['content']['link']}}" class="portfolio-link">
 					<div class="caption">
 						<div class="caption-content">
-							<h3>{{$v['title']}}</h3>
-							<h4>{{$v['category']}}</h4>
+							<h3>{{$v['content']['caption']}}</h3>
+							<h4>{{$v['content']['category']}}</h4>
 						</div>
 					</div>
-					<img src="{{$v['thumbnail']}}" class="img-responsive" alt=""> </a> 
+					<img src="{{$v['content']['thumbnail']}}" class="img-responsive" alt=""> </a> 
 				</div>
 				@endforeach
 			</div>

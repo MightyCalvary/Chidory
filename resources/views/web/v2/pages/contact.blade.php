@@ -27,17 +27,26 @@
 					<form id="main-contact-form" name="contact-form" method="post" action="{{route('showcase.tell')}}">
 						<div class="col-xs-10 col-sm-6">
 							<div class="form-group">
-								<input type="text" name="name" id="name" class="form-control" required="required" placeholder="Chidory">
-							</div>
-							<div class="form-group">
-								<input type="text" name="phone" id="phone" class="form-control" required="required" placeholder="+62.xxx.xxxx.xxx">
+								<input type="text" name="name" id="name" class="form-control" required="required" placeholder="Mr. Who">
 							</div>
 							<div class="form-group">
 								<input type="email" name="email" id="email" class="form-control" required="required" placeholder="chidory@gmail.com">
 							</div>
 							<div class="form-group">
-								<textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Please send me quotation about prewedding in Jogja"></textarea>
+								<input type="text" name="phone" id="phone" class="form-control" required="required" placeholder="+62.xxx.xxxx.xxx">
 							</div>
+							<div class="form-group">
+								<select type="category" name="category" id="category" class="form-control" required="required">
+									@foreach($category as $k => $v)
+										<option value="{{$v['content']['category']}}">{{$v['content']['category']}}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="form-group">
+								<input type="date" name="date" id="date" class="form-control" required="required" placeholder="when">
+								<span><small class="text-info" style="padding-left: 10px;">*shooting date</small></span>
+							</div>
+							
 							<div class="form-group">
 								<button id="submit_btn" class="default-btn gray-btn"> Send <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
 							</div>

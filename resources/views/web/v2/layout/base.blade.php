@@ -64,10 +64,11 @@
 		<!-- footer section -->
 		<footer id="contact" class="footer">
 			<div class="container-fluid">
-				<!-- <div class="col-md-2 left">
+				<div class="col-md-2 left">
 					<h4>Office Location</h4>
-					<p> PCP II AS 86 Kedungkandang, Malang - Indonesia</p>
-				</div> -->
+					<p> Jl. Welirang 1 / 109 Malang, Jawa Timur</p>
+					<!-- <p> Chandra Kirana Regency C2 / 25A, Singosari, Malang, Jawa Timur</p> -->
+				</div>
 				<div class="col-md-2 left">
 					<h4>Contact</h4>
 					<p> Call: +62.857.9088.4091 <br>
