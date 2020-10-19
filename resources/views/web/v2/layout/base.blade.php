@@ -6,9 +6,20 @@
 <html class="no-js" lang=""> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
-		<meta name="description" content="">
+		<meta name="description" content="{{$layout['description']}}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Chidory - Photograph Malang</title>
+
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<meta property="og:type" content="website"/>
+		<meta property="og:url" content="{{$layout['og_url']}}" />
+		<meta property="og:site_name" content="{{$layout['og_site_name']}}" />
+		<meta name="twitter:card" content="{{$layout['twitter_card']}}" />
+
+		<title>Chidory Photography</title>
+		
+		<link rel="icon" type="image/png" href="/gambar/logo/favicon.ico"/>
+
 		<link rel="stylesheet" href="/auro/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/auro/css/flexslider.css">
 		<link rel="stylesheet" href="/auro/css/main.css">
@@ -45,7 +56,12 @@
 		<section class="tophead" role="tophead"> 
 			<!-- Navigation Section -->
 			<header id="header">
-				<div class="header-content clearfix" style="border-bottom: 1px solid #ddd !important;"> <a class="logo" href="{{route('showcase.home')}}"><img src="http://chidory.co/theme/images/icons/chi_logo.png" style="max-width: 40px;"></a>
+				<div class="header-content clearfix" style="border-bottom: 1px solid #ddd !important;"> 
+					<a class="logo" href="{{route('showcase.home')}}">
+						<img class="hidden-xs" src="/gambar/logo/logo.png" style="max-width: 160px; padding: 5px !important;position: fixed;top:2px;">
+						<img class="hidden-sm hidden-md hidden-lg" src="/gambar/logo/logo.png" style="max-width:150px; padding: 5px !important;position: fixed;top:2px; ">
+						<p>&nbsp;</p>
+					</a>
 					<nav class="navigation" role="navigation">
 						<ul class="primary-nav">
 							<li><a href="{{route('showcase.home')}}" class="@yield('nav.home')">Home</a></li>
@@ -66,26 +82,32 @@
 			<div class="container-fluid">
 				<div class="col-md-2 left">
 					<h4>Office Location</h4>
-					<p> Jl. Welirang 1 / 109 Malang, Jawa Timur</p>
+					<p>{{config()->get('web.address')}}</p>
 					<!-- <p> Chandra Kirana Regency C2 / 25A, Singosari, Malang, Jawa Timur</p> -->
+					<div class="clearfix">&nbsp;</div>
 				</div>
 				<div class="col-md-2 left">
 					<h4>Contact</h4>
-					<p> Call: +62.857.9088.4091 <br>
-						Email : <a href="mailto:hello@chidory.co"> hello@chidory.co </a></p>
+					<p> Call: {{config()->get('web.phone')}} <br>
+						Email : <a href="mailto:{{config()->get('web.email')}}"> {{config()->get('web.email')}} </a></p>
+					<div class="clearfix">&nbsp;</div>
 				</div>
 				<div class="col-md-2 left">
 					<h4>Social presense</h4>
 					<ul class="footer-share">
-						<li><a href="https://wa.me/6285790884091?text=I'm%20inquiring%20about%20the%20photograph" target="__blank"><i class="fa fa-whatsapp"></i></a></li>
-						<li><a href="https://www.facebook.com/chidoryhome/" target="__blank"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="https://www.instagram.com/chidoryhome" target="__blank"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="https://www.youtube.com/channel/UClo_wcUys2fFDVhmuXWkCyw" target="__blank"><i class="fa fa-youtube"></i></a></li>
+						<li><a href="{{config()->get('web.whatsapp')}}" target="__blank"><i class="fa fa-whatsapp" style="font-size: 16px !important;"></i></a></li>
+						<li>&nbsp;</li>
+						<li><a href="{{config()->get('web.facebook')}}" target="__blank"><i class="fa fa-facebook" style="font-size: 16px !important;"></i></a></li>
+						<li>&nbsp;</li>
+						<li><a href="{{config()->get('web.instagram')}}" target="__blank"><i class="fa fa-instagram" style="font-size: 16px !important;"></i></a></li>
+						<li>&nbsp;</li>
+						<li><a href="{{config()->get('web.youtube')}}" target="__blank"><i class="fa fa-youtube" style="font-size: 16px !important;"></i></a></li>
 					</ul>
+					<div class="clearfix">&nbsp;</div>
 				</div>
 				<div class="col-md-6 right">
 					<p>© 2018 All rights reserved. All Rights Reserved<br>
-						Made with <i class="fa fa-heart pulse"></i> by <a href="http://www.chidory.co/">Chidory</a></p>
+						Made with <i class="fa fa-heart pulse"></i> by <a href="{{config()->get('web.url')}}">Chidory</a></p>
 				</div>
 			</div>
 		</footer>

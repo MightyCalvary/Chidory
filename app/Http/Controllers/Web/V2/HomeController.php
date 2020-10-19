@@ -2,21 +2,35 @@
 
 namespace App\Http\Controllers\Web\V2;
 
-use Carbon\Carbon;
+use Carbon\Carbon, Mail;
 
 use App\Subscribe;
 use App\WebConfig;
 use App\WebContent;
+
+use App\Mail\ContactUs;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+	public function __construct(){
+		$layout['description'] 	= ' Jasa photography dan videography profesional untuk foto prewedding & wedding indoor maupun outdoor area malang, batu, kepanjen, lawang, singosari, pandaan, jawa timur. Harga bersahabat, hasil natural, unik, dan romantis. Juga melayani foto maternity / kehamilan, graduation / wisuda, bayi, anak - anak.';
+		$layout['og_url'] 		= url()->current();
+		$layout['og_site_name'] 	= 'Chidory Photography';
+		$layout['twitter_card'] 	= 'Chidory Photography';
+		
+		view()->share('layout', $layout);
+	}
+
 	public function home() {
 		$now 		= Carbon::now();
 		$slider 	= WebConfig::where('type', 'slider')->active($now)->get();
 		$category 	= WebConfig::where('type', 'category')->active($now)->get();
 
-		return view('web.v2.pages.home', compact('slider', 'category'));
+		$video 		= WebConfig::where('type', 'video')->active($now)->first();
+		$testimony 	= WebConfig::where('type', 'testimony')->active($now)->get();
+
+		return view('web.v2.pages.home', compact('slider', 'category', 'video', 'testimony'));
 	}
 
 	public function portfolio($active = 'All') {
@@ -37,18 +51,20 @@ class HomeController extends Controller
 	}
 
 	public function about() {
-		$content 	= $this->getCategory();
-		return view('web.v2.pages.about', compact('content'));
+		return view('web.v2.pages.about');
 	}
 
 	public function contact() {
 		$now 		= Carbon::now();
 		$category 	= WebConfig::where('type', 'category')->active($now)->get();
 
-		return view('web.v2.pages.contact', compact('category'));
+		return view('web.v2.pages.contact', compact('category', 'now'));
 	}
 
-	public function post() {
+	public function tell() {
+		
+		Mail::to('chidoryphotography@gmail.com')->send(new ContactUs(request()->only(['name', 'email', 'phone', 'category', 'date'])));
+
 		return redirect()->route('showcase.contact');
 	}
 
@@ -57,34 +73,5 @@ class HomeController extends Controller
 		$content 	= WebContent::active($now)->where('id', $id)->first();
 
 		return view('web.v2.pages.story', compact('content'));
-	}
-
-	private function getCategory(){
-		return [
-			['title' => 'Dream keep us awake', 'category' => 'Graduation', 'thumbnail' => '/auro/images/portfolio/work-1.jpg', 'link' => route('showcase.portfolio', ['category' => 'Graduation'])],
-			['title' => 'B A T I K', 'category' => 'Product', 'thumbnail' => '/auro/images/portfolio/work-6.jpg', 'link' => route('showcase.portfolio', ['category' => 'Product'])],
-			['title' => 'Love will find it`s way', 'category' => 'Prewedding', 'thumbnail' => '/auro/images/portfolio/work-2.jpg', 'link' => route('showcase.portfolio', ['category' => 'Prewedding'])],
-			['title' => 'On The Aisle', 'category' => 'Wedding', 'thumbnail' => '/auro/images/portfolio/work-3.jpg', 'link' => route('showcase.portfolio', ['category' => 'Wedding'])],
-			['title' => 'The Precious Gift', 'category' => 'Maternity', 'thumbnail' => '/auro/images/portfolio/work-4.jpg', 'link' => route('showcase.portfolio', ['category' => 'Maternity'])],
-			['title' => 'Dream Big', 'category' => 'Children', 'thumbnail' => '/auro/images/portfolio/work-5.jpg', 'link' => route('showcase.portfolio', ['category' => 'Children'])],
-		];
-	}
-
-	private function getContent(){
-		return [
-			['title' => 'Dream keep us awake', 'category' => 'Graduation', 'thumbnail' => '/auro/images/portfolio/work-1.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Graduation'])],
-			['title' => 'B A T I K', 'category' => 'Product', 'thumbnail' => '/auro/images/portfolio/work-6.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Product'])],
-			['title' => 'Love will find it`s way', 'category' => 'Prewedding', 'thumbnail' => '/auro/images/portfolio/work-2.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Prewedding'])],
-			['title' => 'On The Aisle', 'category' => 'Wedding', 'thumbnail' => '/auro/images/portfolio/work-3.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Wedding'])],
-			['title' => 'The Precious Gift', 'category' => 'Maternity', 'thumbnail' => '/auro/images/portfolio/work-4.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Maternity'])],
-			['title' => 'Dream Big', 'category' => 'Children', 'thumbnail' => '/auro/images/portfolio/work-5.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Children'])],
-			['title' => 'Tanya dan Aldy', 'category' => 'Wedding', 'embeed' => 'https://www.youtube.com/embed/dS8BPHq4wfQ', 'type' => 'videography'],
-			['title' => 'Ulfa dan Fano', 'category' => 'Wedding', 'embeed' => 'https://www.youtube.com/embed/9CHTOM1jV38', 'type' => 'videography'],
-			['title' => 'Dream keep us awake', 'category' => 'Graduation', 'thumbnail' => '/auro/images/portfolio/work-7.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Graduation'])],
-			['title' => 'Dream keep us awake', 'category' => 'Graduation', 'thumbnail' => '/auro/images/portfolio/work-8.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Graduation'])],
-			['title' => 'Love will find it`s way', 'category' => 'Prewedding', 'thumbnail' => '/auro/images/portfolio/work-9.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Prewedding'])],
-			['title' => 'Love will find it`s way', 'category' => 'Prewedding', 'thumbnail' => '/auro/images/portfolio/work-10.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Prewedding'])],
-			['title' => 'Love will find it`s way', 'category' => 'Prewedding', 'thumbnail' => '/auro/images/portfolio/work-11.jpg', 'type' => 'photography', 'link' => route('showcase.portfolio', ['category' => 'Prewedding'])],
-		];
 	}
 }

@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$(window).on('scroll', function() {
 		var scroll = $(window).scrollTop();
 
-		if (scroll >= 150) {
+		if (scroll >= 80) {
 			$('#header').addClass('fixed');
 		} else {
 			$('#header').removeClass('fixed');

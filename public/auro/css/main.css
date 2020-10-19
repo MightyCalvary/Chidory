@@ -145,8 +145,8 @@ ul li {
 	display: inline-block;
 }
 .navigation a {
-	color: #555;
-	font-size: 14px;
+	color: #000;
+	font-size: 18px;
 	font-weight: 500;
 	margin-left: 40px;
 	letter-spacing: 0.7px;
@@ -161,9 +161,9 @@ ul li {
 	height: 44px;
 	overflow: hidden;
 	position: fixed;
-	right: 5%;
+	right: 30px;
 	text-indent: 100%;
-	top: 32px;
+	top: 18px;
 	white-space: nowrap;
 	width: 44px;
 	z-index: 99999;
@@ -193,7 +193,7 @@ ul li {
 	transition-property: transform;
 }
 .nav-toggle:before {
-	background-color: #333;
+	background-color: #fff;
 	-moz-transform: scale(1);
 	-ms-transform: scale(1);
 	-webkit-transform: scale(1);
@@ -204,7 +204,7 @@ ul li {
 	transition-duration: 0.3s;
 }
 .nav-toggle:after {
-	background-color: #333;
+	background-color: #fff;
 	-moz-transform: scale(0);
 	-ms-transform: scale(0);
 	-webkit-transform: scale(0);
@@ -215,7 +215,7 @@ ul li {
 	transition-duration: 0s;
 }
 .nav-toggle span {
-	background-color: #fff;
+	background-color: #333;
 	bottom: auto;
 	display: inline-block;
 	height: 3px;
@@ -231,7 +231,7 @@ ul li {
 	transform: translateX(-50%) translateY(-50%);
 }
 .nav-toggle span:before, .nav-toggle span:after {
-	background-color: #fff;
+	background-color: #333;
 	content: "";
 	height: 100%;
 	position: absolute;
@@ -278,7 +278,7 @@ ul li {
 	background-color: rgba(255, 255, 255, 0);
 }
 .nav-toggle.close-nav span:before, .nav-toggle.close-nav span:after {
-	background-color: #fff;
+	background-color: #333;
 }
 .nav-toggle.close-nav span:before {
 	-moz-transform: translateY(0) rotate(45deg);
@@ -528,7 +528,8 @@ ul li {
 .detail-image img {
 	width: 100%;
 }
-.detail-contentbox {
+
+.detail-content {
 	background-color: #fffaf4;
 	padding: 50px;
 	background-image: url(../images/portfolio/tour-bg.png);
@@ -794,7 +795,7 @@ ul li {
 }
 
 #submit_btn {
-    color: #777;
+    color: #66512c;
     background-color: transparent;
     border: none;
     margin-top: 30px;
@@ -802,7 +803,7 @@ ul li {
 }
 
 #submit_btn:hover{
-		color:#777;
+		color:#66512c;
 }
 
 .default-btn {
@@ -825,10 +826,10 @@ ul li {
     transition: all .3s ease-in-out;
     right: 30px;
     top: 0;
-    color:#ccc;
+    color:#cc9b59;
 }
 .gray-btn{
-		color: #777 !important;
+		color: #66512c !important;
     text-transform: uppercase;
     font-weight: 400;
     font-size: 12px !important;
@@ -850,7 +851,7 @@ ul li {
     left: 0;
     width: 50%;
     height: 2px;
-    background-color: #ccc;
+    background-color: #cc9b59;
     -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
@@ -858,4 +859,10 @@ ul li {
 .bg-cream {
 	background-color: #fffaf4;
 	background-image: url(../images/portfolio/tour-bg.png);
+}
+a {
+	color: #555;
+}
+a:hover, a.active {
+	color: #cc9b59;
 }

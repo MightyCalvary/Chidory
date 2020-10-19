@@ -18,7 +18,7 @@
 				<div class="col-sm-12">
 					<ul class="portfolio-filter text-center">
 						@foreach($category as $k => $v)
-						<li><a class="btn btn-default @if(str_is($v['content']['category'], $active)) active @endif" style="margin-top: 15px !important;" href="{{route('showcase.portfolio', ['category' => $v['content']['category']])}}">{{$v['content']['category']}}</a></li>
+						<li><a class="btn btn-default @if(str_is($v['content']['category'], $active)) active @endif" style="font-size:14px; margin-top: 15px !important;" href="{{route('showcase.portfolio', ['category' => $v['content']['category']])}}">{{strtoupper($v['content']['category'])}}</a></li>
 						@endforeach
 					</ul><!--/#portfolio-filter-->
 			   </div>
@@ -55,4 +55,6 @@
 			</div>
 		</div>
 	</section>
+	
+	@include('web.v2.component.contact')
 @endsection

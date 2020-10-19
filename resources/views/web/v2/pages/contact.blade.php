@@ -17,7 +17,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12 text-center">
-					<h4 class="text-red">WE CATCH STORIES</h4>
+					<h4 class="text-red">WE CAPTURE STORIES</h4>
 					<h7>T E L L&emsp;U S&emsp;Y O U R S</h7>
 				</div>
 			</div>
@@ -43,8 +43,8 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<input type="date" name="date" id="date" class="form-control" required="required" placeholder="when">
-								<span><small class="text-info" style="padding-left: 10px;">*shooting date</small></span>
+								<input type="date" name="date" id="date" class="form-control" required="required" placeholder="when" min="{{$now->format('Y-m-d')}}">
+								<span><small class="text-warning" style="padding-left: 10px;">*shooting date</small></span>
 							</div>
 							
 							<div class="form-group">

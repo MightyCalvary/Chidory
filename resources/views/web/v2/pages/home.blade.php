@@ -39,13 +39,13 @@
 			<div class="row bg-cream">
 				<div class="col-md-4">
 					<div class="services-content">
-						<h1 style="font-family: 'Sacramento', cursive;font-size:7rem" class="text-red">Love</h1>
-						<h4 style="font-family: 'Sacramento', cursive;font-size:3.5rem">will find it's way.</h4>
-						<p class="hidden-sm hidden-xs">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas sed diam eget risus varius blandit sit amet non magna. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+						<h1 style="font-family: 'Sacramento', cursive;font-size:7rem" class="text-red">{{$video['content']['title']}}</h1>
+						<h4 style="font-family: 'Sacramento', cursive;font-size:3.5rem">{{$video['content']['subtitle']}}</h4>
+						<p class="hidden-sm hidden-xs">{{$video['content']['description']}}</p>
 					</div>
 				</div>
 				<div class="col-md-8" style="margin-top:50px;">
-					<video controls src="/video/wedding.mp4"></video>
+					<video controls src="{{$video['content']['embeed']}}"></video>
 				</div>
 			</div>
 		</div>
@@ -78,38 +78,16 @@
 			<div class="row no-gutter">
 				<div class="flexslider">
 					<ul class="slides">
+						@foreach($testimony as $k => $v)
 						<li>
 							<div class="col-md-12">
 								<blockquote>
-									<h1>"Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui. Phasellus non dolor nibh. Nullam elementum Aenean eu leo quam..." </h1>
-									<p style="font-size:16px;margin-top: 10px;">Rene Brown, Open Window production</p>
+									<h1>"{{$v['content']['comment']}}" </h1>
+									<p style="font-size:16px;margin-top: 10px;">{{$v['content']['source']}}</p>
 								</blockquote>
 							</div>
 						</li>
-						<li>
-							<div class="col-md-12">
-								<blockquote>
-									<h1>"Cras dictum tellus dui, vitae sollicitudin ipsum. Phasellus non dolor nibh. Nullam elementum tellus pretium feugiat shasellus non dolor nibh. Nullam elementum tellus pretium feugiat." </h1>
-									<p style="font-size:16px;margin-top: 10px;">Brain Rice, Lexix Private Limited.</p>
-								</blockquote>
-							</div>
-						</li>
-						<li>
-							<div class="col-md-12">
-								<blockquote>
-									<h1>"Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur...." </h1>
-									<p style="font-size:16px;margin-top: 10px;">Andi Simond, Global Corporate Inc</p>
-								</blockquote>
-							</div>
-						</li>
-						<li>
-							<div class="col-md-12">
-								<blockquote>
-									<h1>"Lorem ipsum dolor sit amet, consectetur adipiscing elitPhasellus non dolor nibh. Nullam elementum tellus pretium feugiat. Cras dictum tellus dui sollcitudin." </h1>
-									<p style="font-size:16px;margin-top: 10px;">Kristy Gabbor, Martix Media</p>
-								</blockquote>
-							</div>
-						</li>
+						@endforeach
 					</ul>
 				</div>
 			</div>
