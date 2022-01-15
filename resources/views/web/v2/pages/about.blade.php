@@ -59,7 +59,7 @@
 						</a>
 					</h7>
 					<p>
-						"Seberkas cahaya yang kutangkap dari kameraku adalah cahaya cinta."
+						"Karya Foto Dan Video Yang Indah Adalah Yang Menyentuh Hati Dan Bercerita."
 					</p>
 				</div>
 				<div class="col-md-3">
@@ -73,7 +73,7 @@
 						</a>
 					</h7>
 					<p>
-						"Jika senyum dan rindu adalah klise, maka yang tercetak adalah cinta."
+						"Foto Yang Indah Bukan Hanya Foto Yang Terang, Karena Bayangan Juga Membentuk Kedalaman Dan Karakter."
 					</p>
 				</div>
 			</div>

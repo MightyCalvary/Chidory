@@ -63,7 +63,7 @@ class HomeController extends Controller
 
 	public function tell() {
 		
-		Mail::to('chidoryphotography@gmail.com')->send(new ContactUs(request()->only(['name', 'email', 'phone', 'category', 'date'])));
+		Mail::to(config()->get('web.email'))->send(new ContactUs(request()->only(['name', 'email', 'phone', 'category', 'date'])));
 
 		return redirect()->route('showcase.contact');
 	}
